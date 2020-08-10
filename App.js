@@ -1,24 +1,16 @@
 import 'react-native-gesture-handler';
 
 import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Platform,
-} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 import {Scene, Router, Actions, Stack} from 'react-native-router-flux';
 
 import {Home} from './components';
 
-const App = () => {
-  useEffect(() => {
-    return Actions.home();
-  }, []);
+export default function App() {
+  // useEffect(() => {
+  // return Actions.home();
+  // }, []);
 
   const stateHandler = (prevState, newState, action) => {
     console.log('onStateChange: ACTION:', action);
@@ -35,6 +27,7 @@ const App = () => {
         <Stack key="root">
           <Scene
             key="home"
+            initial
             component={Home}
             title="Home"
             onEnter={() => console.log('Home: onEnter')}
@@ -46,8 +39,6 @@ const App = () => {
       </Router>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({});
-
-export default App;
