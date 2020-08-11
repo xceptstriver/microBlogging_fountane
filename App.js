@@ -1,17 +1,14 @@
 import 'react-native-gesture-handler';
 
 import React, {useEffect} from 'react';
+import {ThemeProvider} from 'react-native-elements';
 import {StyleSheet, Platform} from 'react-native';
 
 import {Scene, Router, Actions, Stack} from 'react-native-router-flux';
 
-import {Home} from './components';
+import {Home, Login} from './screens';
 
 export default function App() {
-  // useEffect(() => {
-  // return Actions.home();
-  // }, []);
-
   const stateHandler = (prevState, newState, action) => {
     console.log('onStateChange: ACTION:', action);
   };
@@ -20,23 +17,34 @@ export default function App() {
 
   return (
     <>
-      <Router
-        onStateChange={stateHandler}
-        sceneStyle={styles.scene}
-        uriPrefix={prefix}>
-        <Stack key="root">
-          <Scene
-            key="home"
-            initial
-            component={Home}
-            title="Home"
-            onEnter={() => console.log('Home: onEnter')}
-            backTitle="Back"
-            panHandlers={null}
-            duration={1}
-          />
-        </Stack>
-      </Router>
+      <ThemeProvider>
+        <Router
+          onStateChange={stateHandler}
+          sceneStyle={styles.scene}
+          uriPrefix={prefix}>
+          <Stack key="root">
+            <Scene
+              key="login"
+              initial
+              component={Login}
+              title="Login"
+              onEnter={() => console.log('Login: onEnter')}
+              backTitle="Back"
+              panHandlers={null}
+              duration={1}
+            />
+            <Scene
+              key="home"
+              component={Home}
+              title="Home"
+              onEnter={() => console.log('Home: onEnter')}
+              backTitle="Back"
+              panHandlers={null}
+              duration={1}
+            />
+          </Stack>
+        </Router>
+      </ThemeProvider>
     </>
   );
 }
