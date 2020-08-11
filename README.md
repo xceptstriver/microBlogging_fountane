@@ -2,7 +2,7 @@
     RNBoiler
 </h1>
 
-RNBoiler is a minimal React Native Boilerplate with the following in place for you
+RNBoiler is a minimal React Native Boilerplate with the following already setup.
 
 - React Redux + Rematch
 - react-native-router-flux
