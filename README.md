@@ -27,5 +27,6 @@ Change into the repository and install node deps and pod deps
 
 ```sh
 npm i
+npx react-native link
 npx pod-install ios
 ```
