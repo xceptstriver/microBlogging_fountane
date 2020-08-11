@@ -31,6 +31,7 @@ export default function App() {
                 initial
                 component={Login}
                 title="Login"
+                type="reset"
                 onEnter={() => console.log('Login: onEnter')}
                 backTitle="Back"
                 panHandlers={null}

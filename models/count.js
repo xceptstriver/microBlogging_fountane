@@ -4,6 +4,9 @@ const count = {
     increment(state, payload) {
       return state + payload;
     },
+    reset() {
+      return 0;
+    },
   },
   effects: (dispatch) => ({
     async incrementAsync(payload, rootState) {

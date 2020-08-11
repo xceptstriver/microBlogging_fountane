@@ -1,18 +1,20 @@
-import React, {useEffect, useReducer, useRef, useState} from 'react';
-import {View, Text} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useRef, useState} from 'react';
+import {Text, View} from 'react-native';
+import Toast from 'react-native-easy-toast';
 import {Button} from 'react-native-elements';
 import {connect} from 'react-redux';
-import Toast, {DURATION} from 'react-native-easy-toast';
 import {Spacer} from '../components';
 
-const Home = ({count, asyncIncrement, increment}) => {
+const Home = ({count, asyncIncrement, increment, resetCount}) => {
   const toast = useRef();
   const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   if (count > 0) {
-  //     toast.current.show('Updated');
-  //   }
-  // }, [count]);
+
+  useFocusEffect(() => {
+    useCallback(() => {
+      return () => resetCount();
+    }, [count]);
+  });
 
   const handleIncrement = (e) => {
     increment(1);
@@ -52,6 +54,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   increment: dispatch.count.increment,
   asyncIncrement: dispatch.count.incrementAsync,
+  resetCount: dispatch.count.reset,
 });
 
 export default connect(mapState, mapDispatch)(Home);
