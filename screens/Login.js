@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
-import Icons from 'react-native-vector-icons';
 
 export default function Login(props) {
   const handleLogin = () => {
@@ -28,7 +27,8 @@ export default function Login(props) {
         <Button
           onPress={handleLogin}
           title="Login"
-          iconRight={{
+          iconRight
+          icon={{
             name: 'chevron-right',
             size: 15,
             color: 'white',
