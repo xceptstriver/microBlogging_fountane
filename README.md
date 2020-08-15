@@ -18,6 +18,6 @@ A Stack Navigator allows the app to transit between different or multiple screen
 - Configuring a store and setting it up on App.js
 
 First I would create separate folders for different files. Actions in actions folder, reducers in reducers folder etc... I would create separate constants.js file and configureStore.js file and put them inside the project root directory.
-And I'll be using Redux-middleware Redux-thunk for async operations
+
 
 
