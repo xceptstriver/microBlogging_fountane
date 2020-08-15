@@ -1,32 +1,23 @@
 <h1 align="center">
-    RNBoiler
+    Approach
 </h1>
 
-RNBoiler is a minimal React Native Boilerplate with the following already setup.
+Approach and the pattern that will be used to make a micro blogging platform.
 
-- React Redux + Rematch
-- react-native-router-flux
-- react-native-elements
-- react-native-vector-icons
+- Create two MockScreens
 
-## Installation
+Each of these screen files s going to have some random data to display until the stack navigator is set up.
 
-Install Gitscaff
+dependency:
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
-```sh
-curl https://curl-scripts.siddharthgelera.com/gitscaff-setup/setup.sh | bash
-```
+- Set up stack navigator
 
-Use this repository as template to create a project
+A Stack Navigator allows the app to transit between different or multiple screens and manages the navigation history
 
-```sh
-gitscaff github:barelyhuman/rnboiler <app-name>
-```
+- Configuring a store and setting it up on App.js
 
-Change into the repository and install node deps and pod deps
+First I would create separate folders for different files. Actions in actions folder, reducers in reducers folder etc... I would create separate constants.js file and configureStore.js file and put them inside the project root directory.
+And I'll be using Redux-middleware Redux-thunk for async operations
 
-```sh
-npm i
-npx react-native link
-npx pod-install ios
-```
+
