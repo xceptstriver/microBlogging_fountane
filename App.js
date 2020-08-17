@@ -1,57 +1,47 @@
-import 'react-native-gesture-handler';
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+//Redux
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import allReducers from './src/reducers';
+//Stack Navigator
+import MainStackNavigator from './src/navigation/AppNavigator'
+//Redux saga
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './src/sagas/rootSaga'; 
+import { Root } from 'native-base';
 
-import React, {useEffect} from 'react';
-import {ThemeProvider} from 'react-native-elements';
-import {StyleSheet, Platform} from 'react-native';
-import {Provider} from 'react-redux';
-import store from './store';
+const sagaMiddleware = createSagaMiddleware();
 
-import {Scene, Router, Actions, Stack} from 'react-native-router-flux';
+let store = createStore(allReducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
-import {Home, Login} from './screens';
 
-export default function App() {
-  const stateHandler = (prevState, newState, action) => {
-    console.log('onStateChange: ACTION:', action);
-  };
+export default class App extends Component {
 
-  const prefix = Platform.OS === 'android' ? 'mychat://mychat/' : 'mychat://';
-
-  return (
-    <>
-      <ThemeProvider>
-        <Provider store={store}>
-          <Router
-            onStateChange={stateHandler}
-            sceneStyle={styles.scene}
-            uriPrefix={prefix}>
-            <Stack key="root">
-              <Scene
-                key="login"
-                initial
-                component={Login}
-                title="Login"
-                type="reset"
-                onEnter={() => console.log('Login: onEnter')}
-                backTitle="Back"
-                panHandlers={null}
-                duration={1}
-              />
-              <Scene
-                key="home"
-                component={Home}
-                title="Home"
-                onEnter={() => console.log('Home: onEnter')}
-                backTitle="Back"
-                panHandlers={null}
-                duration={1}
-              />
-            </Stack>
-          </Router>
-        </Provider>
-      </ThemeProvider>
-    </>
-  );
+  render() {
+      return (
+          <Provider store={store}>
+             <Root>
+              <MainStackNavigator />
+             </Root>
+          </Provider>
+         
+      );
+  }
+  
 }
 
-const styles = StyleSheet.create({});
+/* const App = () => (
+  <Provider store={store}>
+      <MainStackNavigator />
+  </Provider>
+);
+sagaMiddleware.run(rootSaga);
+AppRegistry.registerComponent('rnboiler', () => App); */
+
+
+
+/* export default function App() {
+  return <MainStackNavigator />
+} */
